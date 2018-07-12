@@ -1,11 +1,10 @@
 # Table of Contents
 1. [Problem](README.md#problem)
 2. [Input Dataset](README.md#input-dataset)
-3. [Instructions](README.md#instructions)
+3. [src/pharmacy_counting.py]
 4. [Output](README.md#output)
-5. [Tips on getting an interview](README.md#tips-on-getting-an-interview)
-6. [Instructions to submit your solution](README.md#instructions-to-submit-your-solution)
-7. [Questions?](README.md#questions?)
+
+
 
 # Problem
 
@@ -129,14 +128,4 @@ Your submission must pass at least the provided test in order to pass the coding
 
 For a limited time we also are making available a <a href="http://ec2-18-210-131-67.compute-1.amazonaws.com/test-my-repo-link">website</a> that will allow you to simulate the environment in which we will test your code. It has been primarily tested on Python code but could be used for Java and C++ repos. Keep in mind that if you need to compile your code (e.g., javac, make), that compilation needs to happen in the `run.sh` file of your code repository. For Python programmers, you are able to use Python2 or Python3 but if you use the later, specify `python3` in your `run.sh` script.
 
-# Instructions to submit your solution
-* To submit your entry please use the link you received in your coding challenge invite email
-* You will only be able to submit through the link one time 
-* Do NOT attach a file - we will not admit solutions which are attached files 
-* Use the submission box to enter the link to your GitHub or Bitbucket repo ONLY
-* Link to the specific repo for this project, not your general profile
-* Put any comments in the README inside your project repo, not in the submission box
-* We are unable to accept coding challenges that are emailed to us 
 
-# Questions?
-Email us at cc@insightdataengineering.com
