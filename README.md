@@ -23,6 +23,7 @@ Count: Individual Prescriber has Unique ID (numetric string), which is used to c
 Summation: Sum over the drug total cost. Data precision problem (check if it is int or floating number). 
 
 2) /src/pharmacy_counting.py
+
 The code is at /src/pharmacy_counting.py. It is a python3 (import sys and re) code and use data structures list, tuples, and dictonary. I used set function in python to find the unique values in a list. 
 To run the code, use python3 pharmacy_counting.py input_file_directory output_file_directory (in run.sh).  
 The input and output files have to be given in the command line. 
@@ -30,7 +31,6 @@ The input and output files have to be given in the command line.
 
 # Output 
 
-Your program needs to create the output file, `top_cost_drug.txt`, that contains comma (`,`) separated fields in each line.
 
 Each line of this file should contain these fields:
 * drug_name: the exact drug name as shown in the input dataset
