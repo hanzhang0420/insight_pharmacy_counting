@@ -11,12 +11,19 @@
 Imagine you are a data engineer working for an online pharmacy. You are asked to generate a list of all drugs, the total number of UNIQUE individuals who prescribed the medication, and the total drug cost, which must be listed in descending order based on the total drug cost and if there is a tie, drug name. 
 
 # Input Dataset
-
-The original dataset was obtained from the Centers for Medicare & Medicaid Services but has been cleaned and simplified to match the scope of the coding challenge. It provides information on prescription drugs prescribed by individual physicians and other health care providers. The dataset identifies prescribers by their ID, last name, and first name.  It also describes the specific prescriptions that were dispensed at their direction, listed by drug name and the cost of the medication. 
+The dataset identifies prescribers by their ID, last name, and first name.  It also describes the specific prescriptions that were dispensed at their direction, listed by drug name and the cost of the medication. 
 
 # My Code
-The code is at /src/pharmacy_counting.py. It is a python3 (import sys) code and use data structures list, tuples, and dictonary. I use set function in python to find the unique 
+1) Understanding of the Input Dataset:
+Counting and Summation problem based on the drug name. 
+Count: Individual Prescriber has Unique ID (numetric string), which is used to count the total num of UNIQUE individuals instead of using the precriber's first and last name. 
+
+Summation: Sum over the drug total cost. Data precision problem (check if it is int or floating number). 
+
+2) /src/pharmacy_counting.py
+The code is at /src/pharmacy_counting.py. It is a python3 (import sys and re) code and use data structures list, tuples, and dictonary. I used set function in python to find the unique values in a list. 
 To run the code, use python3 pharmacy_counting.py input_file_directory output_file_directory (in run.sh).  
+The input and output files have to be given in the command line. 
 
 
 # Output 
@@ -28,41 +35,19 @@ Each line of this file should contain these fields:
 * num_prescriber: the number of unique prescribers who prescribed the drug. For the purposes of this challenge, a prescriber is considered the same person if two lines share the same prescriber first and last names
 * total_cost: total cost of the drug across all prescribers
 
-For example
-
-If your input data, **`itcont.txt`**, is
-```
-id,prescriber_last_name,prescriber_first_name,drug_name,drug_cost
-1000000001,Smith,James,AMBIEN,100
-1000000002,Garcia,Maria,AMBIEN,200
-1000000003,Johnson,James,CHLORPROMAZINE,1000
-1000000004,Rodriguez,Maria,CHLORPROMAZINE,2000
-1000000005,Smith,David,BENZTROPINE MESYLATE,1500
-```
-
-then your output file, **`top_cost_drug.txt`**, would contain the following lines
-```
-drug_name,num_prescriber,total_cost
-CHLORPROMAZINE,2,3000
-BENZTROPINE MESYLATE,1,1500
-AMBIEN,2,300
-```
-
-These files are provided in the `insight_testsuite/tests/test_1/input` and `insight_testsuite/tests/test_1/output` folders, respectively.
-
-
+The code has passed the simple test_1. 
 
 
 ## Repo directory structure
 
-The directory structure for your repo should look like this:
+The directory structure for my repo look like this:
 
     ├── README.md 
     ├── run.sh
     ├── src
     │   └── pharmacy-counting.py
     ├── input
-    │   └── itcont.txt
+    │   └── 
     ├── output
     |   └── top_cost_drug.txt
     ├── insight_testsuite
@@ -73,14 +58,4 @@ The directory structure for your repo should look like this:
             |   │   └── itcont.txt
             |   |__ output
                     └── top_cost_drug.txt
-           
-
-
-
-## Testing your directory structure and output format
-
-To make sure that your code has the correct directory structure and the format of the output files are correct, we have included a test script called `run_tests.sh` in the `insight_testsuite` folder.
-
-The tests are stored simply as text files under the `insight_testsuite/tests` folder. Each test should have a separate folder with an `input` folder for `itcont.txt` and an `output` folder for `top_cost_drug.txt`.
-
-
+          
