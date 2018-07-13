@@ -15,7 +15,8 @@ Imagine you are a data engineer working for an online pharmacy. You are asked to
 The original dataset was obtained from the Centers for Medicare & Medicaid Services but has been cleaned and simplified to match the scope of the coding challenge. It provides information on prescription drugs prescribed by individual physicians and other health care providers. The dataset identifies prescribers by their ID, last name, and first name.  It also describes the specific prescriptions that were dispensed at their direction, listed by drug name and the cost of the medication. 
 
 # My Code
-
+The code is at /src/pharmacy_counting.py. It is a python3 (import sys) code and use data structures list, tuples, and dictonary. I use set function in python to find the unique 
+To run the code, use python3 pharmacy_counting.py input_file_directory output_file_directory (in run.sh).  
 
 
 # Output 
