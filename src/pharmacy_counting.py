@@ -3,17 +3,14 @@
 
 # ## Insight pharmacy counting problem
 
-# In[524]:
-
+#python 3
 
 import sys
+import re
 # input file
 input_file = sys.argv[1]
 output_file= sys.argv[2]
 #input_file = '../insight_testsuite/tests/test_1/input/itcont.txt'#../input/itcont.txt' 
-
-
-# In[523]:
 
 
 with open(input_file,'r') as f:
@@ -22,65 +19,84 @@ f.close()
 print('header',header) # header of the input file 
 
 
-# In[514]:
-
-
 # readin data line by line
-prescriber=[]
+prescriberid=[] # if the same prescriber same id
 drug_name=[]
 drug_cost=[]
+abnormal=[]
+#pattern = '[a-zA-Z0-9,\n]' # only have letters nums , /
+#pattern='^[0-9].[0-9]$'
 with open(input_file,'r') as f:
-    next(f) # skip the first line 
+    next(f) # skip the first line
     for line in f.readlines():
-        prescriber.append(line.replace('\n', '').split(',')[1]+line.replace('\n', '').split(',')[2])
-        drug_name.append(line.replace('\n', '').split(',')[3])
-        drug_cost.append(line.replace('\n', '').split(',')[4])
+        if line.strip():
+            sep=line.replace('\n', '').split(',')
+            #print(sep)
+            if bool(re.match('^\d',sep[0])) and bool(re.match('^\d.',sep[-1])):
+                prescriberid.append(sep[0])
+                drug_cost.append(sep[-1])
+                if (line.find('\"')) >=0:
+                    try:
+                        quote=line.split('\"')[1]
+                        new_line=line.replace('\"'+quote+'\"',quote.replace(',',''))
+                        drug_name.append(new_line.replace('\n', '').split(',')[-2])
+                    except (IndexError, ValueError):
+                        print('Unexpected Data')
+                        abnormal.append(line)
+                        pass
+                else:
+                    drug_name.append(sep[-2])
+            else:
+                abnormal.append(line)
 f.close()
 
 
-# In[515]:
+print('The Number of Lines has unexpected characters',len(abnormal))
+
+print('Number of Unique Drug',len(set(drug_name)))
 
 
-#print('Number of Drug',len(set(drug_name)))
+#==========================================================================================
 
+# drug_name & drug_cost
 
-# In[516]:
+def sum_keep_precision(f1,f2):     # avoid the floating summaiton problem
+    if len(str(f1).split('.'))>1 or len(str(f2).split('.'))>1:
+        res=float("%.2f" %(f1+f2))
+    else:
+        res=int("%d" %(f1+f2))
+    return res
 
-
-# drug_name & drug_cost 
 name_cost=tuple(zip(drug_name,drug_cost))
-
-
-# In[517]:
-
 
 total_cost={}  # add up the cost of drug using the drug name as key 
 for name,cost in name_cost:
     # format float or int 
+
     if len(cost.split('.'))>1:
-        cost=float(cost)
+        cost=float(cost)   # avoid (int('10.000') errors)
     else:
-        cost=int(cost)
-        
+        try:
+            cost=int(cost)
+        except (ValueError):
+            print('Error occurs when converting cost data', cost)
+            continue
+
     if name in total_cost:
-        total_cost[name] += (cost)
+        total_cost[name] = sum_keep_precision(total_cost[name],cost)
     else:
-        total_cost[name]=(cost)       
+        total_cost[name] = cost
 
+print('Finish total_cost')
 
-# In[518]:
-
+#=============================================================================================
 
 # drug_name & prescriber
-name_pres=tuple(zip(drug_name,prescriber))
-#name_pres
-
-
-# In[519]:
+name_pres=tuple(zip(drug_name,prescriberid))
 
 
 # number of prescriber 
-num_prescriber={}         # count the number of prescribers based on the drug name as key 
+num_prescriber={}         # count the number of prescribersid based on the drug name as key
 for name,pres in name_pres:
     pres_u=[]  
     if name in num_prescriber:
@@ -94,8 +110,8 @@ for name in set(drug_name):  #UNIQUE of prescriber
     #print(name)
     num_prescriber[name]=len(set(num_prescriber[name]))    
 
-
-# In[520]:
+print('Finish counting num of prescriber, now writing the output file')
+#==============================================================================================
 
 
 #write output file
@@ -110,5 +126,7 @@ with open(output_file,'w') as f:
         f.write('\n')
         
     f.truncate(f.tell()-1) # remove the newline at the very end 
-f.close()        
+f.close()
+
+print('Done')
 
