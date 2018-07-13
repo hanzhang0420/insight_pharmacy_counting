@@ -15,7 +15,9 @@ The dataset identifies prescribers by their ID, last name, and first name.  It a
 
 # My Code
 1) Understanding of the Input Dataset:
+
 Counting and Summation problem based on the drug name. 
+
 Count: Individual Prescriber has Unique ID (numetric string), which is used to count the total num of UNIQUE individuals instead of using the precriber's first and last name. 
 
 Summation: Sum over the drug total cost. Data precision problem (check if it is int or floating number). 
