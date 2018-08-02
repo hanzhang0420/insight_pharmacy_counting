@@ -1,8 +1,5 @@
 
 # coding: utf-8
-
-# ## Insight pharmacy counting problem
-
 #python 3
 
 import sys
@@ -10,7 +7,6 @@ import re
 # input file
 input_file = sys.argv[1]
 output_file= sys.argv[2]
-
 
 #with open(input_file,'r') as f:
 #    header=f.readlines(10)
