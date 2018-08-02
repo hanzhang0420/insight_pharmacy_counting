@@ -10,13 +10,12 @@ import re
 # input file
 input_file = sys.argv[1]
 output_file= sys.argv[2]
-#input_file = '../insight_testsuite/tests/test_1/input/itcont.txt'#../input/itcont.txt' 
 
 
-with open(input_file,'r') as f:
-    header=f.readlines(10)
-f.close()   
-print('header',header) # header of the input file 
+#with open(input_file,'r') as f:
+#    header=f.readlines(10)
+#f.close()   
+#print('header',header) # header of the input file 
 
 
 # readin data line by line
@@ -55,7 +54,6 @@ print('The Number of Lines has unexpected characters',len(abnormal))
 
 print('Number of Unique Drug',len(set(drug_name)))
 
-
 #==========================================================================================
 
 # drug_name & drug_cost
@@ -67,10 +65,12 @@ def sum_keep_precision(f1,f2):     # avoid the floating summaiton problem
         res=int("%d" %(f1+f2))
     return res
 
-name_cost=tuple(zip(drug_name,drug_cost))
+drug=(zip(drug_name,drug_cost,prescriberid))
 
-total_cost={}  # add up the cost of drug using the drug name as key 
-for name,cost in name_cost:
+total_cost={}  # add up the cost of drug using the drug name as key
+num_prescriber={}
+
+for name,cost,pres in drug:
     # format float or int 
 
     if len(cost.split('.'))>1:
@@ -86,33 +86,21 @@ for name,cost in name_cost:
         total_cost[name] = sum_keep_precision(total_cost[name],cost)
     else:
         total_cost[name] = cost
-
-print('Finish total_cost')
-
-#=============================================================================================
-
-# drug_name & prescriber
-name_pres=tuple(zip(drug_name,prescriberid))
-
-
-# number of prescriber 
-num_prescriber={}         # count the number of prescribersid based on the drug name as key
-for name,pres in name_pres:
-    pres_u=[]  
+    #============================================
+    pres_u=[]
     if name in num_prescriber:
-        num_prescriber[name].append(pres) 
+        num_prescriber[name].append(pres)
     else:
         pres_u.append(pres)
         num_prescriber[name]=(pres_u)
-        
 
-for name in set(drug_name):  #UNIQUE of prescriber 
+
+for name in set(drug_name):  #UNIQUE of prescriber
     #print(name)
-    num_prescriber[name]=len(set(num_prescriber[name]))    
+    num_prescriber[name]=len(set(num_prescriber[name]))
 
-print('Finish counting num of prescriber, now writing the output file')
+print('Finish, now writing the output file')
 #==============================================================================================
-
 
 #write output file
 
